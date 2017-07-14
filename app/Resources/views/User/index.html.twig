@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="userList">
+        <div id="rowTitle">
+            <div class="rowTitleCell">Imie</div>
+            <div class="rowTitleCell">Nazwisko</div>
+            <div class="rowTitleCell">Adres</div>
+            <div class="rowTitleCell">Nazwa użytkownika</div>
+            <div class="rowTitleCell">Hasło</div>
+            <div class="rowTitleCell">Email</div>
+        </div>
+        {% for user in users %}
+            <a href="{{ path('user_show', {'id': user.id}) }}">
+            <div class="rowUser">
+                <div class="rowUserCell">{{ user.name }}</div>
+                <div class="rowUserCell">{{ user.secondName }}</div>
+                <div class="rowUserCell">{{ user.address }}</div>
+                <div class="rowUserCell">{{ user.username }}</div>
+                <div class="rowUserCell">{{ user.plainPassword }}</div>
+                <div class="rowUserCell">{{ user.email }}</div>
+            </div>
+            </a>
+        {% endfor %}
+    </div>
+
+    <a href="{{ path('user_new') }}"><button>Dodaj nowego użytkownika</button></a>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        #userList{
+            margin-left: auto;
+            margin-right: auto;
+            width: 900px;
+            margin-top: 20px;
+        }
+
+        #rowTitle{
+            color: white;
+            font-size: 18px;
+            height: 42px;
+        }
+
+        .rowUser{
+            float: none;
+            height: 42px;
+            transition: 0.3s;
+        }
+
+        .rowUser:hover{
+            background-color: #99CDD8;
+            color: white;
+        }
+
+        .rowTitleCell{
+            float: left;
+            width: 150px;
+            padding: 10px 0 10px 0;
+            text-align: center;
+            background-color: #479aff;
+        }
+
+        .rowUserCell{
+            padding: 10px 0 10px 0;
+            float: left;
+            width: 150px;
+            text-align: center;
+        }
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        a:visited{
+            color: black;
+        }
+        button{
+            color: white;
+            padding: 15px;
+            background-color: #99CDD8;
+            transition: 0.3s;
+            border: 1px;
+            border-color: #99CDD8;
+            border-style: solid;
+            margin: 10px 10px 5px 10px;
+        }
+        button:hover{
+            background-color: white;
+            color: #99CDD8;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}

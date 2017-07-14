@@ -1,0 +1,38 @@
+{% if app.user %}
+        <div id="userPanel">
+            <div id="userPanelContent">
+            <span style="color: white">{{ app.user.username }}</span>
+                <a href="{{ path('logout') }}"><button id="logoutButton">Wyloguj się</button></a>
+            </div>
+        </div>
+
+<style>
+    #userPanel{
+        padding-bottom: 10px;
+        padding-top: 10px;
+        background-color: #99CDD8;
+    }
+    #logoutButton{
+        color: white;
+        padding: 5px;
+        background-color: #99CDD8;
+        transition: 0.3s;
+        border-radius: 10px;
+        border: 1px;
+        border-color: white;
+        border-style: solid;
+        margin-left: 10px;
+    }
+    #logoutButton:hover{
+        background-color: white;
+        color: #99CDD8;
+        cursor: pointer;
+    }
+
+    #userPanelContent{
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+</style>
+{% endif %}

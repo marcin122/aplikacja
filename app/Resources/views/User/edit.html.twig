@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <button type="submit">Zapisz zmiany</button>
+    {{ form_end(edit_form) }}
+
+    <a href="{{ path('user_index') }}"><button>Powrót do listy</button></a>
+    {{ form_start(delete_form) }}
+        {#<input type="submit" value="Delete">#}
+        <button type="submit">Usuń</button>
+    {{ form_end(delete_form) }}
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        input{
+            width: 300px;
+            padding: 15px;
+            margin: 10px 10px 5px 10px;
+            outline: none;
+            box-sizing: border-box;
+            border: 3px solid #99CDD8;
+            transition: 0.5s;
+            outline: none;
+        }
+
+        input:focus{
+            border: 3px solid #479aff;
+        }
+        a:visited{
+            color: black;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        button{
+            color: white;
+            padding: 15px;
+            background-color: #99CDD8;
+            transition: 0.3s;
+            border: 1px;
+            border-color: #99CDD8;
+            border-style: solid;
+            margin: 10px 10px 5px 10px;
+        }
+        button:hover{
+            background-color: white;
+            color: #99CDD8;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}

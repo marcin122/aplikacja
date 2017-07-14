@@ -1,0 +1,133 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Annotations\Annotation;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
+class User implements UserInterface, \Serializable
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $username;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    protected $password;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $plainPassword;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $secondName;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $address;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $isActive;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role", mappedBy="users")
+     */
+    private $userRoles;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->isActive=true;
+        $this->userRoles=array();
+    }
+
+    public function unserialize($serialized)
+    {
+        return list(
+            $this->id,
+            $this->username,
+            $this->password,
+            )=unserialize($serialized);
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
+
+    public function getRoles()
+    {
+        $roles = array();
+        foreach ($this->userRoles as $userRole) {
+            $roles[] = $userRole->getRole();
+        }
+        return $roles;
+    }
+
+    /**
+     * @param mixed $userRoles
+     */
+    public function setUserRoles($userRoles)
+    {
+        $this->userRoles = $userRoles;
+    }
+
+
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+}
